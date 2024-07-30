@@ -1,0 +1,59 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "description": "My personal preferences for Renovate. It will make sure that major updates always go via a PR, and other changes will be auto-merged if tests pass. Dependencies will be checked every morning. Updates will be grouped together.",
+
+  "prCreation": "not-pending",
+  "stabilityDays": 1,
+  "statusCheckVerify": true,
+  "schedule": "before 7am every weekday",
+  "timezone": "Europe/Brussels",
+  "unicodeEmoji": true,
+  "vulnerabilityAlerts": {
+    "enabled": false
+  },
+  "rangeStrategy": "bump",
+  "ignoreDeps": [
+    "eslint",
+    "eslint-config-es",
+    "eslint-import-resolver-typescript",
+    "eslint-plugin-eslint-comments",
+    "eslint-plugin-extended",
+    "eslint-plugin-import",
+    "eslint-plugin-jest",
+    "eslint-plugin-mocha",
+    "eslint-plugin-react",
+    "eslint-plugin-react-hooks",
+    "eslint-plugin-tsdoc",
+    "eslint-plugin-unicorn",
+    "eslint-plugin-unused-imports"
+  ],
+
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "automerge": true,
+      "automergeType": "branch"
+    },
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["major"],
+      "labels": ["dependencies", "breaking"]
+    }
+  ],
+
+  "devDependencies": {
+    "rangeStrategy": "bump"
+  },
+
+  "dockerfile": {
+    "enabled": false
+  },
+  "github-actions": {
+    "enabled": false
+  }
+}
